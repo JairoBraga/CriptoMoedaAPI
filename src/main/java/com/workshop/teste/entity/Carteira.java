@@ -17,13 +17,13 @@ public class Carteira implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_carteira")
+	@Column(name = "CARTEIRA_ID")
 	private Long id;
 	
-	@Column(name = "id_user")
+	@Column(name = "USUARIO_ID")
 	private Long id_user;
 	
-	@Column(name = "moeda_id")
+	@Column(name = "MOEDA_ID")
 	private Long id_moedas;
 
 

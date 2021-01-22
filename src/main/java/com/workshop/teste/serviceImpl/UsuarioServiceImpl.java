@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.workshop.teste.entity.Usuario;
@@ -50,6 +51,11 @@ public class UsuarioServiceImpl implements UsuarioService{
 		Usuario entity = buscaUsuarioId(id);
 		entity.setCarteira(idCarteira);
 		repository.save(entity);
+	}
+
+	@Override
+	public Usuario getByUsername(String username) throws UsernameNotFoundException {
+		return repository.getByUsername(username);
 	}
 
 }

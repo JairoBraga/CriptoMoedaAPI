@@ -17,16 +17,16 @@ public class MoedaUser implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "moeda_id")
+	@Column(name = "MOEDA_ID")
 	private Long id_moedas;
 	
-	@Column(name = "id_carteira")
+	@Column(name = "CARTEIRA_ID")
 	private Long id_carteira;
 	
-	@Column(name = "CR_ID")
+	@Column(name = "ID_COIN")
 	private Long id_cr;
 	
-	@Column(name = "quantidade")
+	@Column(name = "QUANTIDADE")
 	private Double quantidade;
 
 	public MoedaUser() {

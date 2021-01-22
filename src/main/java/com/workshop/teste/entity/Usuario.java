@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
+
 @Entity
 @Table(name="USUARIOS")
 public class Usuario implements Serializable{
@@ -17,22 +19,26 @@ public class Usuario implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_user")
+	@Column(name = "ID_USER")
 	private Long id;
 	
-	@Column(name = "user_nome")
+	@Column(name = "NOME",unique = true)
+	@NotNull
 	private String nome;
 	
-	@Column(name = "user_username")
+	@Column(name = "USERNAME")
+	@NotNull
 	private String username;
 	
-	@Column(name = "user_cpf")
+	@Column(name = "CPF",unique = true)
+	@NotNull
 	private String cpf;
 	
-	@Column(name = "user_password")
+	@Column(name = "PASSWORD")
+	@NotNull
 	private String password;
 	
-	@Column(name = "user_carteiraId")
+	@Column(name = "CARTEIRA_ID")
 	private Long carteira;
 
 	public Usuario() {
