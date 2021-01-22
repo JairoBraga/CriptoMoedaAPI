@@ -10,6 +10,6 @@ import com.workshop.teste.entity.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario,Long>{
 
-	@Query(value = "SELECT us.* FROM usuarios as us WHERE us.user_nome = ?1", nativeQuery = true)
+	@Query(value = "SELECT us.* FROM usuarios as us WHERE us.username = ?1", nativeQuery = true)
 	public Usuario getByUsername(String username) throws UsernameNotFoundException;
 }

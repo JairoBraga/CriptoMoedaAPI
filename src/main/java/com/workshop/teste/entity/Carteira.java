@@ -23,7 +23,7 @@ public class Carteira implements Serializable{
 	@Column(name = "USUARIO_ID")
 	private Long id_user;
 	
-	@Column(name = "MOEDA_ID")
+	@Column(name = "MOEDAS_ID")
 	private Long id_moedas;
 
 
