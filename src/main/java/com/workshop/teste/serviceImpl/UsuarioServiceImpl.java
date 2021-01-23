@@ -37,6 +37,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public void updateUsuario(UsuarioRequest user, Long id) throws UserNotFoundException{
 		Usuario entity = buscaUsuarioId(id);
 		entity.setNome(user.getNome());
+		if(user.getPassword() != null)
 		entity.setPassword(user.getPassword());
 		repository.save(entity);
 	}
