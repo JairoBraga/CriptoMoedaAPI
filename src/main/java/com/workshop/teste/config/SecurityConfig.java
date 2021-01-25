@@ -11,7 +11,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.workshop.teste.service.UsuarioService;
+import com.workshop.teste.serviceImpl.TokenService;
 import com.workshop.teste.serviceImpl.UserDetailsImpl;
 
 @EnableWebSecurity
@@ -19,7 +22,13 @@ import com.workshop.teste.serviceImpl.UserDetailsImpl;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
+	private TokenService tokenService;
+	
+	@Autowired
 	private UserDetailsImpl userDetails;
+	
+	@Autowired
+	private UsuarioService userService;
 	
 	@Bean
 	protected AuthenticationManager authenticationManager() throws Exception {
@@ -36,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.anyRequest().authenticated()
 		.and()
 		.csrf().disable()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+		.and().addFilterBefore(new AutenticacaoTokenFilter(tokenService, userService), UsernamePasswordAuthenticationFilter.class);
 		
 	}
 	//esse aqui serve para configurar as autenticações

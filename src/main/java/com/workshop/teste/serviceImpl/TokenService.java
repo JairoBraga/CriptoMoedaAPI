@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.workshop.teste.entity.Usuario;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -30,6 +31,23 @@ public class TokenService {
 				.setExpiration(dataLimit)
 				.signWith(SignatureAlgorithm.HS512, secret)
 				.compact();
+	}
+
+	public Boolean validarToken(String token) {
+		
+		try {
+		Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+		return true;
+		}catch(Exception e) {
+			return false;
+		}
+		
+	}
+
+	public Long getIdUsuario(String token) {
+		Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+		
+		return Long.parseLong(claims.getSubject());
 	}
 
 }

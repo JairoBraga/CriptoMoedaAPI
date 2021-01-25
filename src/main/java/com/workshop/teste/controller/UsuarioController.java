@@ -1,7 +1,5 @@
 package com.workshop.teste.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +17,6 @@ import com.workshop.teste.entity.Usuario;
 import com.workshop.teste.exceptions.UserNotFoundException;
 import com.workshop.teste.request.UsuarioRequest;
 import com.workshop.teste.response.CarteiraResponse;
-import com.workshop.teste.response.UsuarioResponse;
 import com.workshop.teste.service.CarteiraService;
 import com.workshop.teste.service.UsuarioService;
 
@@ -61,7 +58,7 @@ public class UsuarioController {
 		System.out.println("Atualizado");
 	}
 	
-	@PostMapping(value = "/criarCarteira")
+	@PostMapping(value = "/criar_carteira")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void criarCarteira(@AuthenticationPrincipal UserDetails userDetail) throws UserNotFoundException {
 		Usuario user = service.getByUsername(userDetail.getUsername());
