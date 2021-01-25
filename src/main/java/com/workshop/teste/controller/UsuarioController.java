@@ -24,7 +24,7 @@ import com.workshop.teste.service.CarteiraService;
 import com.workshop.teste.service.UsuarioService;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/minha_conta")
 public class UsuarioController {
 	
 	@Autowired
@@ -34,13 +34,13 @@ public class UsuarioController {
 	private CarteiraService carteiraService;
 	
 	
-	@GetMapping
-	@ResponseStatus(HttpStatus.OK)
-	public List<UsuarioResponse> buscarTodosOsUsuarios(){
-		return service.buscarUsuarios();
-	}
+//	@GetMapping
+//	@ResponseStatus(HttpStatus.OK)
+//	public List<UsuarioResponse> buscarTodosOsUsuarios(){
+//		return service.buscarUsuarios();
+//	}
 	
-	@GetMapping(value = "/home")
+	@GetMapping()
 	public ResponseEntity<Usuario> buscarUsuario(@AuthenticationPrincipal UserDetails userDetail) throws UserNotFoundException {
 		Usuario user = service.getByUsername(userDetail.getUsername());
 		return new ResponseEntity<Usuario>(service.buscaUsuarioId(user.getId()),HttpStatus.OK);
@@ -53,7 +53,7 @@ public class UsuarioController {
 	}
 	
 	
-	@PutMapping()
+	@PutMapping(value = "/atualizar_dados")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizarDados(@AuthenticationPrincipal UserDetails userDetail, @RequestBody UsuarioRequest request) throws UserNotFoundException {
 		Usuario user = service.getByUsername(userDetail.getUsername());
