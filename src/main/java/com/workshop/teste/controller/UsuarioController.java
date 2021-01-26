@@ -17,11 +17,12 @@ import com.workshop.teste.entity.Usuario;
 import com.workshop.teste.exceptions.UserNotFoundException;
 import com.workshop.teste.request.UsuarioRequest;
 import com.workshop.teste.response.CarteiraResponse;
+import com.workshop.teste.response.UsuarioResponse;
 import com.workshop.teste.service.CarteiraService;
 import com.workshop.teste.service.UsuarioService;
 
 @RestController
-@RequestMapping(value = "/minha_conta")
+@RequestMapping()
 public class UsuarioController {
 	
 	@Autowired
@@ -30,17 +31,11 @@ public class UsuarioController {
 	@Autowired
 	private CarteiraService carteiraService;
 	
-	
-//	@GetMapping
-//	@ResponseStatus(HttpStatus.OK)
-//	public List<UsuarioResponse> buscarTodosOsUsuarios(){
-//		return service.buscarUsuarios();
-//	}
-	
-	@GetMapping()
-	public ResponseEntity<Usuario> buscarUsuario(@AuthenticationPrincipal UserDetails userDetail) throws UserNotFoundException {
+	@GetMapping(value = "/minha_conta")
+	public ResponseEntity<UsuarioResponse> buscarUsuario(@AuthenticationPrincipal UserDetails userDetail) throws UserNotFoundException {
 		Usuario user = service.getByUsername(userDetail.getUsername());
-		return new ResponseEntity<Usuario>(service.buscaUsuarioId(user.getId()),HttpStatus.OK);
+		UsuarioResponse response = new UsuarioResponse(user);
+		return new ResponseEntity<UsuarioResponse>(response,HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/cadastrar")
@@ -50,7 +45,7 @@ public class UsuarioController {
 	}
 	
 	
-	@PutMapping(value = "/atualizar_dados")
+	@PutMapping(value = "/minha_conta/atualizar_dados")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizarDados(@AuthenticationPrincipal UserDetails userDetail, @RequestBody UsuarioRequest request) throws UserNotFoundException {
 		Usuario user = service.getByUsername(userDetail.getUsername());
@@ -58,7 +53,7 @@ public class UsuarioController {
 		System.out.println("Atualizado");
 	}
 	
-	@PostMapping(value = "/criar_carteira")
+	@PostMapping(value = "/minha_conta/criar_carteira")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void criarCarteira(@AuthenticationPrincipal UserDetails userDetail) throws UserNotFoundException {
 		Usuario user = service.getByUsername(userDetail.getUsername());

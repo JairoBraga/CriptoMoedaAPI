@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.workshop.teste.entity.Usuario;
@@ -29,16 +30,18 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Override
 	public void salvarUsuario(UsuarioRequest req) {
-		Usuario entity = new Usuario(null,req.getNome(),req.getUsername(),req.getCpf(),req.getPassword(),null);
+		BCryptPasswordEncoder enc = new BCryptPasswordEncoder();
+		Usuario entity = new Usuario(null,req.getNome(),req.getUsername(),req.getCpf(),enc.encode(req.getPassword()),null);
 		repository.save(entity);
 	}
 
 	@Override
 	public void updateUsuario(UsuarioRequest user, Long id) throws UserNotFoundException{
+		BCryptPasswordEncoder enc = new BCryptPasswordEncoder();
 		Usuario entity = buscaUsuarioId(id);
 		entity.setNome(user.getNome());
 		if(user.getPassword() != null)
-		entity.setPassword(user.getPassword());
+		entity.setPassword(enc.encode(user.getPassword()));
 		repository.save(entity);
 	}
 
@@ -56,7 +59,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Override
 	public Usuario getByUsername(String username) throws UsernameNotFoundException {
-		return repository.getByUsername(username);
+		Usuario user = repository.getByUsername(username);
+		return user;
 	}
 
 }
