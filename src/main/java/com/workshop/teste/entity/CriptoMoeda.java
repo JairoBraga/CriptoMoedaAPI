@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +31,9 @@ public class CriptoMoeda implements Serializable{
 	@Column(name = "CR_PRECO")
 	private Double preco;
 	
+	@ManyToOne(targetEntity = Carteira.class)
+	@JoinColumn(name = "carteira_id")
+	private Carteira carteira;
 	
 	public CriptoMoeda() {
 	}

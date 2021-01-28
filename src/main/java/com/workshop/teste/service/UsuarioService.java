@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.workshop.teste.entity.Carteira;
 import com.workshop.teste.entity.Usuario;
 import com.workshop.teste.exceptions.UserNotFoundException;
 import com.workshop.teste.request.UsuarioRequest;
@@ -22,5 +23,5 @@ public interface UsuarioService {
 
 	public Usuario buscaUsuarioId(Long id) throws UserNotFoundException;
 	
-	public void AdicionarCarteira(Long idCarteira,Long id) throws UserNotFoundException;
+	public void AdicionarCarteira(Carteira Carteira,Long id) throws UserNotFoundException;
 }

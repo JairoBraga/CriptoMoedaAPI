@@ -2,13 +2,13 @@ package com.workshop.teste.service;
 
 import org.springframework.stereotype.Service;
 
-import com.workshop.teste.response.CarteiraResponse;
+import com.workshop.teste.entity.Carteira;
 
 @Service
 public interface CarteiraService {
-	public CarteiraResponse criarCarteira(Long idUser);
+	public Carteira criarCarteira();
 
-	public CarteiraResponse buscarCarteiraPorId(Long id);
+	public Carteira buscarCarteiraPorId(Long id);
 
 }
 

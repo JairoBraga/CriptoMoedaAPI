@@ -26,7 +26,6 @@ public class UsuarioRequest {
 	public UsuarioRequest() {}
 	
 	public UsuarioRequest(Long id, String nome, String username, String cpf, Long carteira) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.username = username;
@@ -39,7 +38,7 @@ public class UsuarioRequest {
 		this.nome = usuario.getNome();
 		this.username = usuario.getUsername();
 		this.cpf = usuario.getCpf();
-		this.carteira = usuario.getCarteira();
+		this.carteira = usuario.getCarteira().getId();
 	}
 
 	public Long getId() {

@@ -1,12 +1,14 @@
 package com.workshop.teste.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,17 +22,16 @@ public class Carteira implements Serializable{
 	@Column(name = "CARTEIRA_ID")
 	private Long id;
 	
-	@Column(name = "USUARIO_ID")
-	private Long id_user;
+	@OneToMany(mappedBy = "carteira")
+	private List<CriptoMoeda> moedas;
 	
-	@Column(name = "MOEDAS_ID")
-	private Long id_moedas;
+	public Carteira(){	
+	}
 
-
-	public Carteira() {}
-
-	public Carteira(Long id_user) {
-		this.id_user = id_user;
+	public Carteira(Long id, List<CriptoMoeda> moedas) {
+		super();
+		this.id = id;
+		this.moedas = moedas;
 	}
 
 	public Long getId() {
@@ -41,20 +42,11 @@ public class Carteira implements Serializable{
 		this.id = id;
 	}
 
-	public Long getId_user() {
-		return id_user;
+	public List<CriptoMoeda> getMoedas() {
+		return moedas;
 	}
 
-	public void setId_user(Long id_user) {
-		this.id_user = id_user;
+	public void setMoedas(List<CriptoMoeda> moedas) {
+		this.moedas = moedas;
 	}
-
-	public Long getId_moedas() {
-		return id_moedas;
-	}
-
-	public void setId_moedas(Long id_moedas) {
-		this.id_moedas = id_moedas;
-	}
-	
 }

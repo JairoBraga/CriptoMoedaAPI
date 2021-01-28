@@ -11,7 +11,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -45,17 +47,19 @@ public class Usuario implements Serializable,UserDetails{
 	@Column(name = "PASSWORD")
 	@NotNull
 	private String password;
-	
-	@Column(name = "CARTEIRA_ID")
-	private Long carteira;
 
+	@OneToOne()
+	@JoinColumn(name = "CARTEIRA_ID")
+	private Carteira carteira;
+	
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Perfil> perfis = new ArrayList<>();
 	
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String nome, String username, String cpf, String password, Long carteira) {
+	public Usuario(Long id, String nome, String username, String cpf, String password, Carteira carteira) {
 		this.id = id;
 		this.nome = nome;
 		this.username = username;
@@ -95,7 +99,7 @@ public class Usuario implements Serializable,UserDetails{
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	@Override
+
 	public String getPassword() {
 		return password;
 	}
@@ -104,12 +108,20 @@ public class Usuario implements Serializable,UserDetails{
 		this.password = password;
 	}
 
-	public Long getCarteira() {
+	public Carteira getCarteira() {
 		return carteira;
 	}
 
-	public void setCarteira(Long carteira) {
+	public void setCarteira(Carteira carteira) {
 		this.carteira = carteira;
+	}
+
+	public List<Perfil> getPerfis() {
+		return perfis;
+	}
+
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
 	}
 
 	@Override

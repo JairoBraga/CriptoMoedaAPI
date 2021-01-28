@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.workshop.teste.entity.Carteira;
 import com.workshop.teste.entity.Usuario;
-import com.workshop.teste.response.CarteiraResponse;
 import com.workshop.teste.service.CarteiraService;
 import com.workshop.teste.service.UsuarioService;
 
@@ -26,8 +26,8 @@ public class CarteiraController {
 		
 	@GetMapping()
 	@ResponseStatus(HttpStatus.OK)
-	public CarteiraResponse buscarCarteiraPorId(@AuthenticationPrincipal UserDetails userDetail) {
+	public Carteira buscarCarteiraPorId(@AuthenticationPrincipal UserDetails userDetail) {
 		Usuario user = userService.getByUsername(userDetail.getUsername());
-		return service.buscarCarteiraPorId(user.getCarteira());
+		return service.buscarCarteiraPorId(user.getCarteira().getId());
 	}
 }

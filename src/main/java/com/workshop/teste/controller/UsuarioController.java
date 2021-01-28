@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.workshop.teste.entity.Carteira;
 import com.workshop.teste.entity.Usuario;
 import com.workshop.teste.exceptions.UserNotFoundException;
 import com.workshop.teste.request.UsuarioRequest;
-import com.workshop.teste.response.CarteiraResponse;
 import com.workshop.teste.response.UsuarioResponse;
 import com.workshop.teste.service.CarteiraService;
 import com.workshop.teste.service.UsuarioService;
@@ -44,7 +44,6 @@ public class UsuarioController {
 		service.salvarUsuario(request);
 	}
 	
-	
 	@PutMapping(value = "/minha_conta/atualizar_dados")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizarDados(@AuthenticationPrincipal UserDetails userDetail, @RequestBody UsuarioRequest request) throws UserNotFoundException {
@@ -57,8 +56,7 @@ public class UsuarioController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void criarCarteira(@AuthenticationPrincipal UserDetails userDetail) throws UserNotFoundException {
 		Usuario user = service.getByUsername(userDetail.getUsername());
-		CarteiraResponse carteira = carteiraService.criarCarteira(user.getId());
-		service.AdicionarCarteira(carteira.getId(), user.getId());
-	}
-	
+		Carteira carteira = carteiraService.criarCarteira();
+		service.AdicionarCarteira(carteira, user.getId());
+	}	
 }

@@ -1,6 +1,7 @@
 package com.workshop.teste.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.workshop.teste.entity.Carteira;
 import com.workshop.teste.entity.Usuario;
 
 public class UsuarioResponse {
@@ -17,12 +18,12 @@ public class UsuarioResponse {
 	@JsonProperty(value = "CPF")
 	private String cpf;
 	
-	@JsonProperty(value = "Id_Carteira")
-	private Long carteira;
+	@JsonProperty(value = "Carteira")
+	private Carteira carteira;
 
 	public UsuarioResponse() {}
 	
-	public UsuarioResponse(Long id, String nome, String username, String cpf, Long carteira) {
+	public UsuarioResponse(Long id, String nome, String username, String cpf, Carteira carteira) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -71,11 +72,12 @@ public class UsuarioResponse {
 		this.cpf = cpf;
 	}
 
-	public Long getCarteira() {
+	public Carteira getCarteira() {
 		return carteira;
 	}
 
-	public void setCarteira(Long carteira) {
+	public void setCarteira(Carteira carteira) {
 		this.carteira = carteira;
 	}
+
 }

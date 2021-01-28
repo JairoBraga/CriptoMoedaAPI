@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.workshop.teste.entity.Carteira;
 import com.workshop.teste.entity.Usuario;
 import com.workshop.teste.exceptions.UserNotFoundException;
 import com.workshop.teste.repository.UsuarioRepository;
@@ -51,9 +52,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 
 	@Override
-	public void AdicionarCarteira(Long idCarteira,Long id) throws UserNotFoundException {
+	public void AdicionarCarteira(Carteira carteira,Long id) throws UserNotFoundException {
 		Usuario entity = buscaUsuarioId(id);
-		entity.setCarteira(idCarteira);
+		entity.setCarteira(carteira);
 		repository.save(entity);
 	}
 

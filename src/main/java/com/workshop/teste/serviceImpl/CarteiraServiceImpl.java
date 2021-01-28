@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.workshop.teste.entity.Carteira;
 import com.workshop.teste.repository.CarteiraRepository;
-import com.workshop.teste.response.CarteiraResponse;
 import com.workshop.teste.service.CarteiraService;
 
 @Service
@@ -17,18 +16,15 @@ public class CarteiraServiceImpl implements CarteiraService{
 	private CarteiraRepository repository;
 
 	@Override
-	public CarteiraResponse criarCarteira(Long idUser) {
-		Carteira carteira = new Carteira(idUser);
-		Carteira entity = repository.save(carteira);
-		CarteiraResponse response = new CarteiraResponse(entity);
-		return response;
+	public Carteira criarCarteira() {
+		Carteira entity = repository.save( new Carteira());
+		return entity;
 	}
 
 	@Override
-	public CarteiraResponse buscarCarteiraPorId(Long id) {
+	public Carteira buscarCarteiraPorId(Long id) {
 		Optional<Carteira> entity = repository.findById(id);
-		CarteiraResponse response = new CarteiraResponse(entity.get());
-		return response;
+		return entity.get();
 	}
 	
 
