@@ -1,6 +1,7 @@
 package com.workshop.teste.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.NotNull;
 import com.workshop.teste.entity.Usuario;
 
 public class UsuarioRequest {
@@ -9,14 +10,18 @@ public class UsuarioRequest {
 	private Long id;
 	
 	@JsonProperty(value = "nome")
+	@NotNull
 	private String nome;
 	
+	@NotNull
 	@JsonProperty(value = "Username")
 	private String username;
 	
 	@JsonProperty(value = "CPF")
+	@NotNull
 	private String cpf;
 	
+	@NotNull
 	@JsonProperty(value = "user_password")
 	private String password;
 	
