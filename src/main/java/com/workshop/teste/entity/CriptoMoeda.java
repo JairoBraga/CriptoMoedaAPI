@@ -1,14 +1,15 @@
 package com.workshop.teste.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,9 +32,8 @@ public class CriptoMoeda implements Serializable{
 	@Column(name = "CR_PRECO")
 	private Double preco;
 	
-	@ManyToOne(targetEntity = Carteira.class)
-	@JoinColumn(name = "carteira_id")
-	private Carteira carteira;
+	@OneToMany(mappedBy = "id.criptoMoeda")
+	private Set<CarteiraMoedas> carteiraMoedas = new HashSet<>();
 	
 	public CriptoMoeda() {
 	}

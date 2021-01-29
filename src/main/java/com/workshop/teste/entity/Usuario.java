@@ -48,8 +48,7 @@ public class Usuario implements Serializable,UserDetails{
 	@NotNull
 	private String password;
 
-	@OneToOne()
-	@JoinColumn(name = "CARTEIRA_ID")
+	@OneToOne(mappedBy = "usuario")
 	private Carteira carteira;
 	
 	

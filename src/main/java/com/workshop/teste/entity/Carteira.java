@@ -1,14 +1,17 @@
 package com.workshop.teste.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,13 +25,17 @@ public class Carteira implements Serializable{
 	@Column(name = "CARTEIRA_ID")
 	private Long id;
 	
-	@OneToMany(mappedBy = "carteira")
-	private List<CriptoMoeda> moedas;
+	@OneToOne
+	@JoinColumn(name = "USUARIO_ID")
+	private Usuario usuario;
+	
+	@OneToMany(mappedBy = "id.carteira")
+	private Set<CarteiraMoedas> moedas = new HashSet<>();
 	
 	public Carteira(){	
 	}
 
-	public Carteira(Long id, List<CriptoMoeda> moedas) {
+	public Carteira(Long id, Set<CarteiraMoedas> moedas) {
 		super();
 		this.id = id;
 		this.moedas = moedas;
@@ -42,11 +49,11 @@ public class Carteira implements Serializable{
 		this.id = id;
 	}
 
-	public List<CriptoMoeda> getMoedas() {
+	public Set<CarteiraMoedas> getMoedas() {
 		return moedas;
 	}
 
-	public void setMoedas(List<CriptoMoeda> moedas) {
+	public void setMoedas(Set<CarteiraMoedas> moedas) {
 		this.moedas = moedas;
 	}
 }
