@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.GET,"/home").permitAll()
+		.antMatchers(HttpMethod.GET,"/cripto_moedas").permitAll()
 		.antMatchers(HttpMethod.POST,"/auth").permitAll()
 		.anyRequest().authenticated()
 		.and()
